@@ -15,9 +15,11 @@ function SideNav() {
         <p id="navButton" onClick={openNav}>
           &times;
         </p>
-        <p>Home</p>
-        <p>Notes</p>
-        <p>Folders</p>
+        <ul>
+          <li>Home</li>
+          <li>Notes</li>
+          <li>Folders</li>
+        </ul>
       </div>
     </div>
   );
