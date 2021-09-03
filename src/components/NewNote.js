@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import TinyMCE from './TinyMCE';
+import SideNav from './SideNav';
+import './NewNote.css';
 
 function NewNote() {
   const editorRef = useRef(null);
@@ -11,8 +13,13 @@ function NewNote() {
 
   return (
     <div>
-      <TinyMCE editorRef={editorRef} />
-      <button onClick={getData}>Save</button>
+      <div className="topNav">
+        <SideNav />
+      </div>
+      <div className="mainContent">
+        <TinyMCE editorRef={editorRef} />
+        <button onClick={getData}>Save</button>
+      </div>
     </div>
   );
 }

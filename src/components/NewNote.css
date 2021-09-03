@@ -1,0 +1,12 @@
+.topNav {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  align-items: center;
+}
+
+.mainContent {
+  margin-left: 200px;
+  /*
+  When opening the nav, make the content on the screen shift over.
+  */
+}
