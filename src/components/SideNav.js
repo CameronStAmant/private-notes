@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './SideNav.css';
 
 function SideNav() {
@@ -16,8 +17,12 @@ function SideNav() {
           &times;
         </p>
         <ul>
-          <li>Home</li>
-          <li>Notes</li>
+          <li>
+            <Link to="/">Home</Link>{' '}
+          </li>
+          <li>
+            <Link to="/notebook">Notes</Link>
+          </li>
           <li>Folders</li>
         </ul>
       </div>
