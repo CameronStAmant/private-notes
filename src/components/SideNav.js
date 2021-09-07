@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SideNav.css';
 
-function SideNav() {
-  const [visibility, setVisibility] = useState(false);
+function SideNav(props) {
+  // const [visibility, setVisibility] = useState(false);
 
-  const openNav = () => {
-    setVisibility(!visibility);
-  };
+  // const openNav = () => {
+  //   setVisibility(!visibility);
+  // };
 
   return (
     <div id="sideNav">
-      <span onClick={openNav}>&#9776;</span>
-      <div id={visibility ? 'openNavi' : 'closeNav'}>
-        <p id="navButton" onClick={openNav}>
+      <span onClick={props.openNav}>&#9776;</span>
+      <div id={props.visibility ? 'openNavi' : 'closeNav'}>
+        <p id="navButton" onClick={props.openNav}>
           &times;
         </p>
         <ul>
