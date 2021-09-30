@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import TinyMCE from './TinyMCE';
 import SideNav from './SideNav';
+import { useSelector } from 'react-redux';
 import './NewNote.css';
 
 function NewNote() {
-  const [visibility, setVisibility] = useState(false);
+  const view = useSelector((state) => state.nav.value);
 
   const editorRef = useRef(null);
   const getData = () => {
@@ -13,18 +14,12 @@ function NewNote() {
     }
   };
 
-  const openNav = () => {
-    setVisibility(!visibility);
-  };
-
   return (
     <div>
       <div className="topNav">
-        <SideNav visibility={visibility} openNav={openNav} />
+        <SideNav />
       </div>
-      <div
-        className={visibility ? 'mainContentNavOpened' : 'mainContentNavClosed'}
-      >
+      <div className={view ? 'mainContentNavOpened' : 'mainContentNavClosed'}>
         <TinyMCE editorRef={editorRef} />
         <button onClick={getData}>Save</button>
       </div>

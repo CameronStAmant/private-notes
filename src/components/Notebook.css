@@ -3,3 +3,32 @@
   grid-template-columns: 1fr 5fr 1fr;
   align-items: center;
 }
+
+.topNav {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  align-items: center;
+}
+
+.mainContentNavClosed {
+  /* margin-left: 200px; */
+  /*
+  When opening the nav, make the content on the screen shift over.
+  */
+}
+@media screen and (min-width: 320px) {
+  .mainContentNavOpened {
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .mainContentNavOpened {
+    margin-left: 200px;
+    display: block;
+    transition-duration: 0.5s;
+  }
+
+  .mainContentNavClosed {
+    transition-duration: 0.5s;
+  }
+}

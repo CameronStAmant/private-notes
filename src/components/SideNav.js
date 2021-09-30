@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { viewable } from '../features/counter/navigationSlice';
 import './SideNav.css';
 
-function SideNav(props) {
-  // const [visibility, setVisibility] = useState(false);
-
-  // const openNav = () => {
-  //   setVisibility(!visibility);
-  // };
+function SideNav() {
+  const view = useSelector((state) => state.nav.value);
+  const dispatch = useDispatch();
 
   return (
     <div id="sideNav">
-      <span onClick={props.openNav}>&#9776;</span>
-      <div id={props.visibility ? 'openNavi' : 'closeNav'}>
-        <p id="navButton" onClick={props.openNav}>
+      <span onClick={() => dispatch(viewable())}>&#9776;</span>
+      <div id={view ? 'openNavi' : 'closeNav'}>
+        <p id="navButton" onClick={() => dispatch(viewable())}>
           &times;
         </p>
         <ul>
           <li>
-            <Link to="/">Home</Link>{' '}
+            <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/notebook">Notes</Link>
