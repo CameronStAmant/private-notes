@@ -10,7 +10,6 @@ const ContentListings = () => {
       const response = await fetch(baseUrl + '/notebook/');
       const listings = await response.json();
 
-      console.log(listings);
       const listNotes = listings.map((note) => {
         return <ContentCard note={note} key={note._id} />;
       });
