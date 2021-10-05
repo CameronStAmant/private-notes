@@ -1,4 +1,5 @@
 import './ContentCard.css';
+import { Link } from 'react-router-dom';
 
 function ContentCard(props) {
   const createMarkup = () => {
@@ -7,7 +8,9 @@ function ContentCard(props) {
 
   return (
     <li className="contentCard">
-      <div>{props.note.title}</div>
+      <Link to={'/notebook/' + props.note._id}>
+        <div>{props.note.title}</div>
+      </Link>
       <div dangerouslySetInnerHTML={createMarkup()} />
     </li>
   );
