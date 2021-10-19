@@ -3,12 +3,14 @@ import TinyMCE from './TinyMCE';
 import SideNav from './SideNav';
 import { useSelector } from 'react-redux';
 import baseUrl from '../const';
+import { useHistory } from 'react-router-dom';
 import './NewNote.css';
 
 function NewNote() {
   const [title, setTitle] = useState(null);
   const view = useSelector((state) => state.nav.value);
   const editorRef = useRef(null);
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +25,9 @@ function NewNote() {
         body: editorRef.current.getContent(),
       }),
     };
-    await fetch(baseUrl + '/notebook/create', requestOptions);
+    const response = await fetch(baseUrl + '/notebook/create', requestOptions);
+    const redirectUrl = await response.json();
+    history.push(redirectUrl.url);
   };
 
   return (
