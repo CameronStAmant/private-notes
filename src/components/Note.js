@@ -3,14 +3,28 @@ import SideNav from './SideNav';
 import { useParams } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import baseUrl from '../const';
+import { useHistory } from 'react-router-dom';
 
 function Note() {
   const [title, setTitle] = useState(null);
   const [body, setBody] = useState(null);
   let { id } = useParams();
+  const history = useHistory();
 
   const createMarkup = () => {
     return { __html: body };
+  };
+
+  const deleteNote = async () => {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'applications/json',
+      },
+    };
+
+    await fetch(baseUrl + '/notebook/' + id, requestOptions);
+    history.push('/notebook/');
   };
 
   useEffect(() => {
@@ -28,6 +42,7 @@ function Note() {
       <div className="topNav">
         <SideNav />
         <div>{title}</div>
+        <button onClick={deleteNote}>Delete</button>
         <div dangerouslySetInnerHTML={createMarkup()} />
       </div>
     </div>
