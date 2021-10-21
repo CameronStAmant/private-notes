@@ -47,7 +47,7 @@ function NewNote() {
           <label>Body</label>
           <TinyMCE
             editorRef={editorRef}
-            value={data.state ? data.state.body : ''}
+            body={data.state ? data.state.body : ''}
           />
           <button onClick={handleSubmit}>Save</button>
         </form>
