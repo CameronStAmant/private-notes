@@ -3,11 +3,12 @@ import TinyMCE from './TinyMCE';
 import SideNav from './SideNav';
 import { useSelector } from 'react-redux';
 import baseUrl from '../const';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import './NewNote.css';
 
 function NewNote() {
-  const [title, setTitle] = useState(null);
+  const data = useLocation();
+  const [title, setTitle] = useState(data.state ? data.state.title : null);
   const view = useSelector((state) => state.nav.value);
   const editorRef = useRef(null);
   const history = useHistory();
@@ -44,7 +45,10 @@ function NewNote() {
             onChange={(e) => setTitle(e.target.value)}
           />
           <label>Body</label>
-          <TinyMCE editorRef={editorRef} />
+          <TinyMCE
+            editorRef={editorRef}
+            value={data.state ? data.state.body : ''}
+          />
           <button onClick={handleSubmit}>Save</button>
         </form>
       </div>
