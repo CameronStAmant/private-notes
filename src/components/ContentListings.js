@@ -3,8 +3,9 @@ import ContentCard from './ContentCard';
 import React, { useState, useEffect } from 'react';
 import baseUrl from '../const';
 
-const ContentListings = () => {
+const ContentListings = (props) => {
   const [notes, setNotes] = useState(null);
+
   useEffect(() => {
     const fetchNotes = async () => {
       const response = await fetch(baseUrl + '/notebook/');
@@ -17,7 +18,7 @@ const ContentListings = () => {
       setNotes(listNotes);
     };
     fetchNotes();
-  }, []);
+  }, [props.refresh]);
 
   return <ul className="contentListings">{notes}</ul>;
 };
