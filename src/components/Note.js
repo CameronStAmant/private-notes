@@ -10,7 +10,7 @@ function Note() {
   const [body, setBody] = useState(null);
   let { id } = useParams();
   const history = useHistory();
-  let { path, url } = useRouteMatch();
+  let { url } = useRouteMatch();
 
   const createMarkup = () => {
     return { __html: body };
@@ -43,7 +43,9 @@ function Note() {
       <div className="topNav">
         <SideNav />
         <div>{title}</div>
-        <Link to={`${url}/edit`}>
+        <Link
+          to={{ pathname: `${url}/edit`, state: { title: title, body: body } }}
+        >
           <button>Edit</button>
         </Link>
         <button onClick={deleteNote}>Delete</button>
