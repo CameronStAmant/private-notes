@@ -21,6 +21,12 @@ function App() {
         <Route exact path="/notebook/:id">
           <Note />
         </Route>
+        <Route exact path="/notebook/:id/edit">
+          <NewNote />
+          {
+            //Change NewNote to better describe both new notes and edits
+          }
+        </Route>
       </Switch>
     </Router>
   );
