@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { viewable } from '../features/counter/navigationSlice';
+import Folders from './Folders';
 import './SideNav.css';
 
 function SideNav() {
@@ -21,7 +22,7 @@ function SideNav() {
           <li>
             <Link to="/notebook">Notes</Link>
           </li>
-          <li>Folders</li>
+          <Folders />
         </ul>
       </div>
     </div>
