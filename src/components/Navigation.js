@@ -10,7 +10,7 @@ const Navigation = (props) => {
     <div>
       <SideNav />
       <div className={view ? 'mainContentNavOpened' : 'mainContentNavClosed'}>
-        <TopNav setReload={props.setReload} />
+        <TopNav setReload={props.setReload} folderId={props.folderId} />
         {props.children}
       </div>
     </div>

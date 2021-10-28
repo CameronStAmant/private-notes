@@ -27,12 +27,31 @@ const TopNav = (props) => {
     props.setReload();
   };
 
+  const deleteFolder = async () => {
+    const promptDecision = window.confirm(
+      'Are you sure you want to delete this folder and all notes within it?'
+    );
+    if (promptDecision === true) {
+      const requestOptions = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      await fetch(
+        `${baseUrl}/notebook/folders/${props.folderId}`,
+        requestOptions
+      );
+    }
+  };
+
   return (
     <div>
       <Link to="/notes/new">
         <Button wording="+" />
       </Link>
       <button onClick={multiDelete}>Delete selected</button>
+      <button onClick={deleteFolder}>Delete folder</button>
     </div>
   );
 };
