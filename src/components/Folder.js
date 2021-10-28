@@ -3,6 +3,7 @@ import baseUrl from '../const';
 import { useParams } from 'react-router';
 import ContentCard from './ContentCard';
 import SideNav from './SideNav';
+import Navigation from './Navigation';
 
 const Folder = () => {
   const [noteList, setNoteList] = useState(null);
@@ -25,12 +26,14 @@ const Folder = () => {
   }, [id]);
 
   return (
-    <div>
-      <div className="topNav">
-        <SideNav />
+    <Navigation>
+      <div>
+        <div className="topNav">
+          <SideNav />
+        </div>
+        <ul>{noteList}</ul>
       </div>
-      <ul>{noteList}</ul>
-    </div>
+    </Navigation>
   );
 };
 
