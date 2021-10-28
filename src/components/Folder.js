@@ -28,9 +28,6 @@ const Folder = () => {
   return (
     <Navigation>
       <div>
-        <div className="topNav">
-          <SideNav />
-        </div>
         <ul>{noteList}</ul>
       </div>
     </Navigation>
