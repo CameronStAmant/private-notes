@@ -1,6 +1,7 @@
 import './Notebook.css';
 import baseUrl from '../const';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Folders() {
   const [name, setName] = useState(null);
@@ -35,7 +36,13 @@ function Folders() {
       const response = await fetch(`${baseUrl}/notebook/folders`);
       const responseJSON = await response.json();
       const folderListings = responseJSON.map((folder) => {
-        return <div key={folder._id}>{folder.name}</div>;
+        return (
+          <li key={folder._id}>
+            <Link to={`/notebook/folders/${folder._id}`}>
+              <div>{folder.name}</div>
+            </Link>
+          </li>
+        );
       });
 
       setFolderList(folderListings);
@@ -62,7 +69,7 @@ function Folders() {
           <input type="submit" value="Create" onClick={handleSubmit} />
         </form>
       )}
-      <div>{folderList}</div>
+      <ul>{folderList}</ul>
     </div>
   );
 }
