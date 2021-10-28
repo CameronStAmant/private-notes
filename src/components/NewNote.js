@@ -48,7 +48,7 @@ function NewNote() {
       setFolders(folderList);
     };
     GETFolders();
-  });
+  }, []);
 
   return (
     <div>
