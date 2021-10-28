@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import Navigation from './Navigation';
 
 function Notebook() {
+  const [reload, setReload] = useState(new Date());
+
   return (
-    <Navigation>
+    <Navigation setReload={() => setReload(new Date())}>
       <div>
         <p>Welcome to the notebook</p>
-        <ContentListings />
+        <ContentListings reload={reload} />
       </div>
     </Navigation>
   );

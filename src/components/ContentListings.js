@@ -2,11 +2,9 @@ import './ContentListings.css';
 import ContentCard from './ContentCard';
 import React, { useState, useEffect } from 'react';
 import baseUrl from '../const';
-import { useSelector } from 'react-redux';
 
-const ContentListings = () => {
+const ContentListings = (props) => {
   const [notes, setNotes] = useState(null);
-  const reload = useSelector((state) => state.selected.value);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -20,7 +18,7 @@ const ContentListings = () => {
       setNotes(listNotes);
     };
     fetchNotes();
-  }, [reload]);
+  }, [props.reload]);
 
   return <ul className="contentListings">{notes}</ul>;
 };

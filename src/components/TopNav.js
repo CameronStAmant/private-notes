@@ -6,7 +6,7 @@ import baseUrl from '../const';
 
 import Button from './Button';
 
-const TopNav = () => {
+const TopNav = (props) => {
   const selected = useSelector((state) => state.selected.value);
   const [refresh, setRefresh] = useState(false);
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const TopNav = () => {
     await fetch(baseUrl + '/notebook/delete-many-notes', requestOptions);
     setRefresh(refresh ? false : true);
     dispatch(clear());
+    props.setReload();
   };
 
   return (
