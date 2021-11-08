@@ -1,0 +1,9 @@
+img {
+  filter: invert(1);
+  height: 15px;
+  display: inline-block;
+}
+
+.folderInfo {
+  display: inline-block;
+}

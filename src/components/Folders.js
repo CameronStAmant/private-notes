@@ -1,13 +1,17 @@
 import './Notebook.css';
 import baseUrl from '../const';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import editCog from '../images/setting-line.png';
+import './Folders.css';
 
 function Folders() {
   const [name, setName] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [folderList, setFolderList] = useState(null);
   const [requestData, setRequestData] = useState(new Date());
+  const [editFolderName, setEditFolderName] = useState(false);
+  const refContainer = useRef(null);
 
   const newForm = () => {
     setShowForm(true);
@@ -31,6 +35,46 @@ function Folders() {
     setShowForm(false);
   };
 
+  const handleUpdateSubmit = async (e, folder) => {
+    e.preventDefault();
+
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: refContainer.current.value,
+      }),
+    };
+    await fetch(`${baseUrl}/notebook/folders/${folder._id}`, requestOptions);
+    setEditFolderName(false);
+  };
+
+  const editFolder = (e) => {
+    setEditFolderName(e._id);
+  };
+
+  const folderEditor = (folder) => {
+    return (
+      <div>
+        <div className="folderInfo">
+          <form>
+            <input
+              type="text"
+              defaultValue={name ? name : folder.name}
+              ref={refContainer}
+            />
+            <button onClick={(e) => handleUpdateSubmit(e, folder)}>
+              Update
+            </button>
+          </form>
+        </div>
+        <button onClick={() => editFolder('')}>Cancel</button>
+      </div>
+    );
+  };
+
   useEffect(() => {
     const GETFolders = async () => {
       const response = await fetch(`${baseUrl}/notebook/folders`);
@@ -38,9 +82,20 @@ function Folders() {
       const folderListings = responseJSON.map((folder) => {
         return (
           <li key={folder._id}>
-            <Link to={`/notebook/folders/${folder._id}`}>
-              <div>{folder.name}</div>
-            </Link>
+            {editFolderName === folder._id ? (
+              folderEditor(folder)
+            ) : (
+              <div>
+                <div className="folderInfo">
+                  <Link to={`/notebook/folders/${folder._id}`}>
+                    <div>{folder.name}</div>
+                  </Link>
+                </div>
+                <button onClick={() => editFolder(folder)}>
+                  <img src={editCog} height="50px" alt="Edit" />
+                </button>
+              </div>
+            )}
           </li>
         );
       });
@@ -50,7 +105,7 @@ function Folders() {
       setName(null);
     };
     GETFolders();
-  }, [requestData]);
+  }, [requestData, editFolderName]);
 
   return (
     <div>
