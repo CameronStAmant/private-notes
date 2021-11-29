@@ -4,12 +4,20 @@ import Notebook from './components/Notebook';
 import NewNote from './components/NewNote';
 import Note from './components/Note';
 import Folder from './components/Folder';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
         <Route exact path="/notebook">
           <Notebook />
         </Route>

@@ -15,8 +15,12 @@ function Home() {
           Private Notes is a privacy friendly notepad where you can jot down
           whatever is on your mind. Only you can read it.
         </p>
-        <Button wording="Login" />
-        <Button wording="Signup" />
+        <Link to="/login">
+          <Button wording="Login" />
+        </Link>
+        <Link to="signup">
+          <Button wording="Signup" />
+        </Link>
         <Link to="/notebook">
           <Button wording="Go to Notebook" />
         </Link>

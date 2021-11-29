@@ -1,0 +1,55 @@
+import React, { useState } from 'react';
+import baseUrl from '../const';
+
+const Signup = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [reEnteredPassword, setReEnteredPassword] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password === reEnteredPassword) {
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      };
+
+      const response = await fetch(`${baseUrl}/signup`, requestOptions);
+    } else {
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>Username:</label>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <label>Password:</label>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <label>Re-enter Password:</label>
+      <input
+        type="password"
+        value={reEnteredPassword}
+        onChange={(e) => setReEnteredPassword(e.target.value)}
+      />
+      <input type="submit" value="Signup" />
+    </form>
+  );
+};
+
+export default Signup;
