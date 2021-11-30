@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import baseUrl from '../const';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +24,9 @@ const Login = () => {
     };
 
     const response = await fetch(`${baseUrl}/login`, requestOptions);
-    // console.log(await response.json());
+    if (response.status === 201) {
+      history.push('notebook');
+    }
   };
 
   return (
