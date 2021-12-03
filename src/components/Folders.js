@@ -77,7 +77,9 @@ function Folders() {
 
   useEffect(() => {
     const GETFolders = async () => {
-      const response = await fetch(`${baseUrl}/notebook/folders`);
+      const response = await fetch(`${baseUrl}/notebook/folders`, {
+        credentials: 'include',
+      });
       const responseJSON = await response.json();
       const folderListings = responseJSON.map((folder) => {
         return (

@@ -8,7 +8,9 @@ const ContentListings = (props) => {
 
   useEffect(() => {
     const fetchNotes = async () => {
-      const response = await fetch(baseUrl + '/notebook/');
+      const response = await fetch(baseUrl + '/notebook/', {
+        credentials: 'include',
+      });
       const listings = await response.json();
 
       const listNotes = listings.map((note) => {
