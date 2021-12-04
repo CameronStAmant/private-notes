@@ -6,6 +6,7 @@ import './Login.css';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPrompt, setShowPrompt] = useState(false);
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -27,27 +28,37 @@ const Login = () => {
     const response = await fetch(`${baseUrl}/login`, requestOptions);
     if (response.status === 201) {
       history.push('notebook');
+    } else {
+      setShowPrompt(true);
+      setInterval(() => {
+        setShowPrompt(false);
+      }, 4000);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Username:</label>
-      <input
-        type="text"
-        required
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <label>Password:</label>
-      <input
-        type="password"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input type="submit" value="Log In" />
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>Username:</label>
+        <input
+          type="text"
+          required
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <label>Password:</label>
+        <input
+          type="password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input type="submit" value="Log In" />
+      </form>
+      <div id={showPrompt ? '' : 'invalidPrompt'}>
+        Invalid username or password.
+      </div>
+    </div>
   );
 };
 
