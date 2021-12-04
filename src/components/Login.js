@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import baseUrl from '../const';
+import './Login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -34,12 +35,14 @@ const Login = () => {
       <label>Username:</label>
       <input
         type="text"
+        required
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
       <label>Password:</label>
       <input
         type="password"
+        required
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
