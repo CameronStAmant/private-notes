@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import baseUrl from '../const';
+import { useHistory } from 'react-router-dom';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [reEnteredPassword, setReEnteredPassword] = useState('');
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +25,9 @@ const Signup = () => {
       };
 
       const response = await fetch(`${baseUrl}/signup`, requestOptions);
+      if (response.status === 201) {
+        history.push('/login');
+      }
     } else {
     }
   };
