@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import baseUrl from '../const';
 import './Login.css';
 
@@ -7,7 +7,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPrompt, setShowPrompt] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const Login = () => {
 
     const response = await fetch(`${baseUrl}/login`, requestOptions);
     if (response.status === 201) {
-      history.push('notebook');
+      navigate('../notebook');
     } else {
       setShowPrompt(true);
       setInterval(() => {

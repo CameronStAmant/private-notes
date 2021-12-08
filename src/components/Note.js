@@ -3,14 +3,15 @@ import SideNav from './SideNav';
 import { useParams } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import baseUrl from '../const';
-import { useHistory, Link, useRouteMatch } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 function Note() {
   const [title, setTitle] = useState(null);
   const [body, setBody] = useState(null);
   let { id } = useParams();
-  const history = useHistory();
-  let { url } = useRouteMatch();
+  const navigate = useNavigate();
+  let { location } = useLocation();
+  console.log(location);
 
   const createMarkup = () => {
     return { __html: body };
@@ -25,12 +26,14 @@ function Note() {
     };
 
     await fetch(baseUrl + '/notebook/' + id, requestOptions);
-    history.push('/notebook/');
+    navigate('/notebook/');
   };
 
   useEffect(() => {
     const getNoteDetails = async () => {
-      const response = await fetch(baseUrl + '/notebook/' + id);
+      const response = await fetch(baseUrl + '/notebook/' + id, {
+        credentials: 'include',
+      });
       const responseData = await response.json();
       setTitle(responseData.note.title);
       setBody(responseData.note.body);
@@ -44,7 +47,10 @@ function Note() {
         <SideNav />
         <div>{title}</div>
         <Link
-          to={{ pathname: `${url}/edit`, state: { title: title, body: body } }}
+          to={{
+            locationname: `${location}/edit`,
+            state: { title: title, body: body },
+          }}
         >
           <button>Edit</button>
         </Link>

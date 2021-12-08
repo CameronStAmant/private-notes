@@ -3,7 +3,7 @@ import TinyMCE from './TinyMCE';
 import SideNav from './SideNav';
 import { useSelector } from 'react-redux';
 import baseUrl from '../const';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './NewNote.css';
 
 function NewNote() {
@@ -13,7 +13,7 @@ function NewNote() {
   const [selectedOption, setSelectedOptions] = useState('');
   const view = useSelector((state) => state.nav.value);
   const editorRef = useRef(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ function NewNote() {
     };
     const response = await fetch(baseUrl + '/notebook/create', requestOptions);
     const redirectUrl = await response.json();
-    history.push(redirectUrl.url);
+    navigate(redirectUrl.url);
   };
 
   useEffect(() => {

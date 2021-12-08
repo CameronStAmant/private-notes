@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { clear } from '../features/counter/selectSlice';
 import baseUrl from '../const';
@@ -10,7 +10,7 @@ const TopNav = (props) => {
   const selected = useSelector((state) => state.selected.value);
   const [refresh, setRefresh] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const multiDelete = async () => {
     const requestOptions = {
@@ -43,7 +43,7 @@ const TopNav = (props) => {
         `${baseUrl}/notebook/folders/${props.folderId}`,
         requestOptions
       );
-      history.push('/notebook');
+      navigate('/notebook');
     }
   };
 
