@@ -6,6 +6,7 @@ const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [reEnteredPassword, setReEnteredPassword] = useState('');
+  const [showPrompt, setShowPrompt] = useState(false);
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -27,36 +28,43 @@ const Signup = () => {
       const response = await fetch(`${baseUrl}/signup`, requestOptions);
       if (response.status === 201) {
         history.push('/login');
+      } else {
+        setShowPrompt(true);
+        setInterval(() => {
+          setShowPrompt(false);
+        }, 4000);
       }
-    } else {
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Username:</label>
-      <input
-        type="text"
-        required
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <label>Password:</label>
-      <input
-        type="password"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <label>Re-enter Password:</label>
-      <input
-        type="password"
-        required
-        value={reEnteredPassword}
-        onChange={(e) => setReEnteredPassword(e.target.value)}
-      />
-      <input type="submit" value="Signup" />
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>Username:</label>
+        <input
+          type="text"
+          required
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <label>Password:</label>
+        <input
+          type="password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <label>Re-enter Password:</label>
+        <input
+          type="password"
+          required
+          value={reEnteredPassword}
+          onChange={(e) => setReEnteredPassword(e.target.value)}
+        />
+        <input type="submit" value="Signup" />
+      </form>
+      <div id={showPrompt ? '' : 'invalidPrompt'}>Username already in use.</div>
+    </div>
   );
 };
 
