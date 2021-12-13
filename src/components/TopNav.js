@@ -23,7 +23,7 @@ const TopNav = (props) => {
         ids: selected,
       }),
     };
-    await fetch(baseUrl + '/notebook/delete-many-notes', requestOptions);
+    await fetch(`${baseUrl}/notebook/delete-many-notes`, requestOptions);
     setRefresh(refresh ? false : true);
     dispatch(clear());
     props.setReload();

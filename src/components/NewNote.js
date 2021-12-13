@@ -30,7 +30,7 @@ function NewNote() {
         folder: selectedOption,
       }),
     };
-    const response = await fetch(baseUrl + '/notebook/create', requestOptions);
+    const response = await fetch(`${baseUrl}/notebook/create`, requestOptions);
     const redirectUrl = await response.json();
     navigate(redirectUrl.url);
   };

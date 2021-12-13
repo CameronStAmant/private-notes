@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import baseUrl from '../const';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import ContentCard from './ContentCard';
 import SideNav from './SideNav';
 import Navigation from './Navigation';

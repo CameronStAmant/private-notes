@@ -1,9 +1,8 @@
 import './Note.css';
 import SideNav from './SideNav';
-import { useParams } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import baseUrl from '../const';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link, useLocation, useParams } from 'react-router-dom';
 
 function Note() {
   const [title, setTitle] = useState(null);
@@ -25,13 +24,13 @@ function Note() {
       },
     };
 
-    await fetch(baseUrl + '/notebook/' + id, requestOptions);
+    await fetch(`${baseUrl}/notebook/${id}`, requestOptions);
     navigate('/notebook/');
   };
 
   useEffect(() => {
     const getNoteDetails = async () => {
-      const response = await fetch(baseUrl + '/notebook/' + id, {
+      const response = await fetch(`${baseUrl}/notebook/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
         },

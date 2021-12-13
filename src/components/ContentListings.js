@@ -8,7 +8,7 @@ const ContentListings = (props) => {
 
   useEffect(() => {
     const fetchNotes = async () => {
-      const response = await fetch(baseUrl + '/notebook/', {
+      const response = await fetch(`${baseUrl}/notebook/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
         },
