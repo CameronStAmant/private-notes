@@ -21,7 +21,7 @@ function ContentCard(props) {
   return (
     <li className="contentCard">
       <input type="checkbox" onClick={checkboxToggle} />
-      <Link to={'/notebook/' + props.note._id}>
+      <Link to={`/notebook/${props.note._id}`}>
         <div>{props.note.title}</div>
       </Link>
       <div dangerouslySetInnerHTML={createMarkup()} />
