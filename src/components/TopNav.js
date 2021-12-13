@@ -17,6 +17,7 @@ const TopNav = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
       },
       body: JSON.stringify({
         ids: selected,
@@ -37,6 +38,7 @@ const TopNav = (props) => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
         },
       };
       await fetch(

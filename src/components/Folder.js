@@ -12,7 +12,11 @@ const Folder = () => {
 
   useEffect(() => {
     const GETNotes = async () => {
-      const response = await fetch(`${baseUrl}/notebook/folders/${id}`);
+      const response = await fetch(`${baseUrl}/notebook/folders/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
+        },
+      });
       const responseData = await response.json();
 
       const notes = Object.values(responseData);

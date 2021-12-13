@@ -9,7 +9,9 @@ const ContentListings = (props) => {
   useEffect(() => {
     const fetchNotes = async () => {
       const response = await fetch(baseUrl + '/notebook/', {
-        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
+        },
       });
       const listings = await response.json();
 

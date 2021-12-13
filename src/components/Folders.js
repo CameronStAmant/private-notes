@@ -24,6 +24,7 @@ function Folders() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
       },
       body: JSON.stringify({
         name: name,
@@ -42,6 +43,7 @@ function Folders() {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
       },
       body: JSON.stringify({
         name: refContainer.current.value,
@@ -78,7 +80,9 @@ function Folders() {
   useEffect(() => {
     const GETFolders = async () => {
       const response = await fetch(`${baseUrl}/notebook/folders`, {
-        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
+        },
       });
       const responseJSON = await response.json();
       const folderListings = responseJSON.map((folder) => {

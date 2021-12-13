@@ -11,7 +11,6 @@ function Note() {
   let { id } = useParams();
   const navigate = useNavigate();
   let { location } = useLocation();
-  console.log(location);
 
   const createMarkup = () => {
     return { __html: body };
@@ -22,6 +21,7 @@ function Note() {
       method: 'DELETE',
       headers: {
         'Content-Type': 'applications/json',
+        Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
       },
     };
 
@@ -32,7 +32,9 @@ function Note() {
   useEffect(() => {
     const getNoteDetails = async () => {
       const response = await fetch(baseUrl + '/notebook/' + id, {
-        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
+        },
       });
       const responseData = await response.json();
       setTitle(responseData.note.title);

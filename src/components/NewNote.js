@@ -22,6 +22,7 @@ function NewNote() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
       },
       body: JSON.stringify({
         title: title,
@@ -36,7 +37,11 @@ function NewNote() {
 
   useEffect(() => {
     const GETFolders = async () => {
-      const response = await fetch(`${baseUrl}/notebook/folders`);
+      const response = await fetch(`${baseUrl}/notebook/folders`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('Authorization')}`,
+        },
+      });
       const responseList = await response.json();
       const folderList = responseList.map((folder) => {
         return (

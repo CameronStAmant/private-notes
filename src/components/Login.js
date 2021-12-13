@@ -14,7 +14,6 @@ const Login = () => {
 
     const requestOptions = {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -25,8 +24,11 @@ const Login = () => {
       }),
     };
 
-    const response = await fetch(`${baseUrl}/login`, requestOptions);
+    let response = await fetch(`${baseUrl}/login`, requestOptions);
+    const token = await response.json();
+
     if (response.status === 201) {
+      localStorage.setItem('Authorization', token.accessToken);
       navigate('../notebook');
     } else {
       setShowPrompt(true);
