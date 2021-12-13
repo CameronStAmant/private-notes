@@ -47,12 +47,7 @@ function Note() {
       <div className="topNav">
         <SideNav />
         <div>{title}</div>
-        <Link
-          to={{
-            locationname: `${location}/edit`,
-            state: { title: title, body: body },
-          }}
-        >
+        <Link to="./edit" state={{ title, body }}>
           <button>Edit</button>
         </Link>
         <button onClick={deleteNote}>Delete</button>
